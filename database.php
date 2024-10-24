@@ -1,5 +1,5 @@
 <?php
-session_start(); // Start the session at the beginning
+session_start(); 
 
 $host = 'localhost:8080';
 $dbname = 'todo_db';
@@ -13,10 +13,9 @@ try {
     echo "Connection failed: " . $e->getMessage();
 }
 
-// You can now access $_SESSION variables if needed, for example:
-// if (!isset($_SESSION['user_id'])) {
-//     header('Location: login.php'); // Redirect to login if user is not logged in
-//     exit();
-// }
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php'); 
+    exit();
+}
 
 ?>

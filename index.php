@@ -1,17 +1,14 @@
 <?php
-session_start(); // Start the session
+session_start(); 
 
-// Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit();
 }
 
-// Get the username from session or default to 'Guest'
 $username = isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : 'Guest';
 
-// Use correct path for requiring the database file
-require_once __DIR__ . '/../config/database.php'; // Adjust this path based on your directory structure
+require_once __DIR__ . '/../config/database.php'; 
 ?>
 
 <!DOCTYPE html>
@@ -68,7 +65,6 @@ require_once __DIR__ . '/../config/database.php'; // Adjust this path based on y
         document.addEventListener('DOMContentLoaded', function() {
             loadTodos();
             
-            // Add Todo Form
             document.getElementById('addTodoForm').addEventListener('submit', function(e) {
                 e.preventDefault();
                 const input = document.getElementById('todoInput');
@@ -80,7 +76,6 @@ require_once __DIR__ . '/../config/database.php'; // Adjust this path based on y
                 }
             });
 
-            // Filter Buttons
             document.querySelectorAll('[data-filter]').forEach(button => {
                 button.addEventListener('click', function() {
                     const filter = this.dataset.filter;
