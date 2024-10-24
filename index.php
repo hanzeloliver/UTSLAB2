@@ -1,11 +1,19 @@
 <?php
-session_start();
+session_start(); // Start the session
+
+// Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit();
 }
-require_once 'config/database.php';
+
+// Get the username from session or default to 'Guest'
+$username = isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : 'Guest';
+
+// Use correct path for requiring the database file
+require_once __DIR__ . '/../config/database.php'; // Adjust this path based on your directory structure
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,13 +28,13 @@ require_once 'config/database.php';
         <div class="container">
             <a class="navbar-brand" href="#">Todo List</a>
             <div class="navbar-nav ms-auto">
-                <span class="nav-item nav-link">Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?></span>
+                <span class="nav-item nav-link">Welcome, <?php echo $username; ?></span>
                 <a class="nav-link" href="logout.php">Logout</a>
             </div>
         </div>
     </nav>
 
-    <div class="container mt-5">
+<div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -48,7 +56,6 @@ require_once 'config/database.php';
                         </div>
 
                         <ul id="todoList" class="list-group">
-                            <!-- Tasks will be inserted here -->
                         </ul>
                     </div>
                 </div>
@@ -193,6 +200,6 @@ require_once 'config/database.php';
                 }
             });
         }
-    </script>
+    </script> 
 </body>
 </html>
